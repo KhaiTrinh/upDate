@@ -153,11 +153,13 @@ upDate upDate::operator--(int dummy) {
 }
 
 // Pre-decrement
-upDate upDate::operator++() {
+upDate upDate::operator--() {
 	int j = g2j(this->dptr[0], this->dptr[1], this->dptr[2]) - 1;
 	j2g(j, this->dptr[0], this->dptr[1], this->dptr[2]);
 	return *this;
 }
+
+
 
 // Displays the date in mm/dd/yyyy format
 ostream& operator<<(ostream& out, const upDate& d) {
