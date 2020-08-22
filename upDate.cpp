@@ -77,6 +77,52 @@ upDate upDate::operator=(const upDate& d) {	// Assignment operator
 	return *this;
 }
 
+// Add n days to this date and reassigns it back to itself
+upDate upDate::operator+=(int n) {
+	int j = g2j(dptr[0], dptr[1], dptr[2]) + n;
+	j2g(j, dptr[0], dptr[1], dptr[2]);
+	return *this;
+}
+
+// Subtract n days from this date and reassigns it back to itself
+upDate upDate::operator-=(int n) {
+	int j = g2j(dptr[0], dptr[1], dptr[2]) - n;
+	j2g(j, dptr[0], dptr[1], dptr[2]);
+	return *this;
+}
+
+// Allows for date obj to add n days
+upDate upDate::operator+(int n) {
+	upDate d;
+	int j = g2j(dptr[0], dptr[1], dptr[2]) + n;
+	j2g(j, d.dptr[0], d.dptr[1], d.dptr[2]);
+	return d;
+}
+
+// Allows for date obj to subtract n days
+upDate upDate::operator-(int n) {
+	upDate d;
+	int j = g2j(dptr[0], dptr[1], dptr[2]) - n;
+	j2g(j, d.dptr[0], d.dptr[1], d.dptr[2]);
+	return d;
+}
+
+// Allows for n days to be added to date obj
+upDate operator+(int n, const upDate& d) {
+	upDate temp;
+	int j = g2j(d.dptr[0], d.dptr[1], d.dptr[2]) + n;
+	j2g(j, temp.dptr[0], temp.dptr[1], temp.dptr[2]);
+	return temp;
+}
+
+// Allows for n days to be subtracted from date obj
+upDate operator-(int n, const upDate& d) {
+	upDate temp;
+	int j = g2j(d.dptr[0], d.dptr[1], d.dptr[2]) - n;
+	j2g(j, temp.dptr[0], temp.dptr[1], temp.dptr[2]);
+	return temp;
+}
+
 // Displays the date in mm/dd/yyyy format
 ostream& operator<<(ostream& out, const upDate& d) {
     out << d.dptr[0] << "/" << d.dptr[1] << "/" << d.dptr[2];
@@ -111,6 +157,8 @@ string upDate::getMonthName() {
 		return "December";
 	}
 }
+
+
 
 // Takes in month, day, and year as parameters
 // And converts them into a Julian integer

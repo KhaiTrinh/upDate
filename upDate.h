@@ -30,6 +30,7 @@ class upDate {
         bool operator<(upDate);
         bool operator>(upDate);
         friend upDate operator+(int, const upDate&);
+        friend upDate operator-(int, const upDate&);
         friend int operator-(const upDate&, const upDate&);
         friend ostream& operator<<(ostream&, const upDate&);
         static int GetDateCount();
