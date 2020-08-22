@@ -1,3 +1,14 @@
+/* 
+===========================================================================
+Name: Khai Trinh
+Date: 08/21/2020
+Description: This program utilizes operator overloading, Gregorian date,
+and Julian date to perform arithmetic with date-objects. The objective
+of the program is to familiarize the concept of operator overloading and 
+dynamic memory alloction in c++.
+=========================================================================== 
+*/
+
 #include "upDate.h"
 
 int upDate::count = 0;	// Keeps count of how many upDate objects exist
@@ -16,8 +27,21 @@ upDate::upDate() {	// Default constructor
 upDate::upDate(int m, int d, int y) {	// Multi constructor
     dptr = new int[3];
     int m1, d1, y1;
+
+	// This converts the Gregorian date to Julian and then back to Gregorian
     int j = g2j(m, d, y);
     j2g(j, m1, d1, y1);
+
+	// This compares the inputed date with the converted date to see if they match
+	if(m == m1 && d == d1 && y == y1) {	// Matching = date is valid
+		dptr[0] = m;
+		dptr[1] = d;
+		dptr[2] = y;
+	} else {	// If not then just set the date to the default
+		dptr[0] = 5;
+		dptr[1] = 11;
+		dptr[2] = 1959;
+	}
 }
 
 upDate::upDate(int j) {	// Constructor using Julian date
@@ -43,14 +67,50 @@ upDate::~upDate() {	// Destructor
     delete []dptr;
 }
 
+upDate upDate::operator=(const upDate& d) {	// Assignment operator
+	// If the addresses match then just return this object
+	if(&d != this) {
+		dptr[0] = d.dptr[0];
+		dptr[1] = d.dptr[1];
+		dptr[2] = d.dptr[2];
+	}
+	return *this;
+}
+
 // Displays the date in mm/dd/yyyy format
 ostream& operator<<(ostream& out, const upDate& d) {
     out << d.dptr[0] << "/" << d.dptr[1] << "/" << d.dptr[2];
     return out;
 }
 
-
-
+string upDate::getMonthName() {
+	switch (dptr[0]) {
+	case 1:
+		return "January";
+	case 2:
+		return "February";
+	case 3:
+		return "March";
+	case 4:
+		return "April";
+	case 5:
+		return "May";
+	case 6:
+		return "June";
+	case 7:
+		return "July";
+	case 8:
+		return "August";
+	case 9:
+		return "September";
+	case 10:
+		return "October";
+	case 11:
+		return "November";
+	case 12:
+		return "December";
+	}
+}
 
 // Takes in month, day, and year as parameters
 // And converts them into a Julian integer
@@ -59,7 +119,7 @@ int g2j(int m, int d, int y) {
 }
 
 // Month, day, and year are passed in as reference in the parameters
-// The Julian int is then converted back into months, day, and year
+// The Julian int is then converted back into month, day, and year
 // And assigns them back to each corresponding variable
 void j2g(int jd, int & m, int & d, int & y) {
 	int l, n, i, j, k;
