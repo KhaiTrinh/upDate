@@ -43,6 +43,7 @@ upDate::upDate(int m, int d, int y) {	// Multi constructor
 		dptr[1] = 11;
 		dptr[2] = 1959;
 	}
+	count++;
 }
 
 upDate::upDate(int j) {	// Constructor using Julian date
@@ -159,7 +160,35 @@ upDate upDate::operator--() {
 	return *this;
 }
 
+// Equal to operator
+bool upDate::operator==(upDate d1) {
+	upDate d(*this);
+	int j = g2j(d.dptr[0], d.dptr[1], d.dptr[2]);
+	int j1 = g2j(d1.dptr[0], d1.dptr[1], d1.dptr[2]);
+	if(j == j1)
+		return true;
+	return false;
+}
 
+// Less than operator
+bool upDate::operator<(upDate d1) {
+	upDate d(*this);
+	int j = g2j(d.dptr[0], d.dptr[1], d.dptr[2]);
+	int j1 = g2j(d1.dptr[0], d1.dptr[1], d1.dptr[2]);
+	if(j < j1)
+		return true;
+	return false;
+}
+
+// Greater than operator
+bool upDate::operator>(upDate d1) {
+	upDate d(*this);
+	int j = g2j(d.dptr[0], d.dptr[1], d.dptr[2]);
+	int j1 = g2j(d1.dptr[0], d1.dptr[1], d1.dptr[2]);
+	if(j > j1)
+		return true;
+	return false;
+}
 
 // Displays the date in mm/dd/yyyy format
 ostream& operator<<(ostream& out, const upDate& d) {
