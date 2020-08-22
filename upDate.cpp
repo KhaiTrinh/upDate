@@ -10,6 +10,7 @@ dynamic memory alloction in c++.
 */
 
 #include "upDate.h"
+#include <cstdlib>
 
 int upDate::count = 0;	// Keeps count of how many upDate objects exist
 
@@ -121,6 +122,13 @@ upDate operator-(int n, const upDate& d) {
 	int j = g2j(d.dptr[0], d.dptr[1], d.dptr[2]) - n;
 	j2g(j, temp.dptr[0], temp.dptr[1], temp.dptr[2]);
 	return temp;
+}
+
+// Calculates the number of days between two dates
+int operator-(const upDate& d1, const upDate& d2) {
+	int j1 = g2j(d1.dptr[0], d1.dptr[1], d1.dptr[2]);
+	int j2 = g2j(d2.dptr[0], d2.dptr[1], d2.dptr[2]);
+	return abs(j1 - j2);
 }
 
 // Displays the date in mm/dd/yyyy format
