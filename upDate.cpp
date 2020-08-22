@@ -131,6 +131,34 @@ int operator-(const upDate& d1, const upDate& d2) {
 	return abs(j1 - j2);
 }
 
+// Post-increment
+upDate upDate::operator++(int dummy) {
+	int j = g2j(this->dptr[0], this->dptr[1], this->dptr[2]) + 1;
+	j2g(j, this->dptr[0], this->dptr[1], this->dptr[2]);
+	return *this;
+}
+
+// Pre-increment
+upDate upDate::operator++() {
+	int j = g2j(this->dptr[0], this->dptr[1], this->dptr[2]) + 1;
+	j2g(j, this->dptr[0], this->dptr[1], this->dptr[2]);
+	return *this;
+}
+
+// Post-decrement
+upDate upDate::operator--(int dummy) {
+	int j = g2j(this->dptr[0], this->dptr[1], this->dptr[2]) - 1;
+	j2g(j, this->dptr[0], this->dptr[1], this->dptr[2]);
+	return *this;
+}
+
+// Pre-decrement
+upDate upDate::operator++() {
+	int j = g2j(this->dptr[0], this->dptr[1], this->dptr[2]) - 1;
+	j2g(j, this->dptr[0], this->dptr[1], this->dptr[2]);
+	return *this;
+}
+
 // Displays the date in mm/dd/yyyy format
 ostream& operator<<(ostream& out, const upDate& d) {
     out << d.dptr[0] << "/" << d.dptr[1] << "/" << d.dptr[2];
