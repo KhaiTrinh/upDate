@@ -129,6 +129,35 @@ ostream& operator<<(ostream& out, const upDate& d) {
     return out;
 }
 
+// Returns number of existing date objs while program is operational
+int upDate::GetDateCount() { return count; }
+
+// Returns the Julian date
+int upDate::julian() { return g2j(dptr[0], dptr[1], dptr[2]); }
+
+int upDate::getMonth() { return dptr[0]; }
+
+int upDate::getDay() { return dptr[1]; }
+
+int upDate::getYear() { return dptr[2]; }
+
+// Setter checks for the validity of the date before setting
+void upDate::setDate(int m, int d, int y) {
+	int m1, d1, y1;
+	int j = g2j(m, d, y);
+	j2g(j, m1, d1, y1);
+
+	if (m == m1 && d == d1 && y == y1) {
+		dptr[0] = m;
+		dptr[1] = d;
+		dptr[2] = y;
+	} else {
+		dptr[0] = 5;
+		dptr[1] = 11;
+		dptr[2] = 1959;
+	}
+}
+
 string upDate::getMonthName() {
 	switch (dptr[0]) {
 	case 1:
@@ -157,8 +186,6 @@ string upDate::getMonthName() {
 		return "December";
 	}
 }
-
-
 
 // Takes in month, day, and year as parameters
 // And converts them into a Julian integer
