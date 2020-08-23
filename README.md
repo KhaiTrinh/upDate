@@ -20,3 +20,9 @@ OBJECTIVE
 
 This program is used to familiarize the concept of operator overloading and dynamic memory allocation (manual control over memory). For this particular program, a pointer is used to keep track of the month, day, and year. Integers would have been much easier to work with but that is not the point of this program.
 
+EXECUTING PROGRAM
+
+I compile and run the program by using cmd with command
+> g++ main main.cpp upDate.h upDate.cpp
+>
+> main
